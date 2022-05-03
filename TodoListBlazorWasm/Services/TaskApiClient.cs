@@ -19,6 +19,11 @@ namespace TodoListBlazorWasm.Services
             _httpClient = httpClient;
         }
 
+        public async Task<bool> CreateTask(TaskCreateRequest request)
+        {
+            var result = await _httpClient.PostAsJsonAsync("/api/tasks", request);
+            return result.IsSuccessStatusCode;
+        }
 
         public async Task<List<TaskDto>> GetTaskList()
         {

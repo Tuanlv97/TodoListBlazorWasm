@@ -23,7 +23,6 @@ namespace TodoList.Api.Controllers
             var users = await _userRepository.GetUserList();
             var assignees = users.Select(x => new AssigneeDto()
             {
-
                 Id = x.Id,
                 FullName = x.FirstName + " " + x.LastName
             });

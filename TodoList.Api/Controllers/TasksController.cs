@@ -57,7 +57,7 @@ namespace TodoList.Api.Controllers
             {
                 Status = x.Status,
                 Name = x.Name,
-                AssigneeId = null,
+                AssigneeId = x.AssigneeId,
                 CreatedDate = x.CreatedDate,
                 Priority = x.Priority,
                 Id = x.Id,

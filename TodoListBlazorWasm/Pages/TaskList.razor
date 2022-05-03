@@ -1,5 +1,6 @@
 ﻿@page "/TaskList"
 @using TodoListBlazorWasm.Components
+@using TodoList.Models.Enums
 <h3>Todo List</h3>
 
 @if (Tasks == null)
@@ -8,6 +9,41 @@
 }
 else
 {
+    <div class="row">
+        <EditForm Model="@TaskListSearch">
+            <div class="row">
+                <div class="col">
+                    <label> Name </label>
+                    <InputText class="form-control" @bind-Value="TaskListSearch.Name"></InputText>
+                </div>
+                <div class="col">
+                    <label> Assignee </label>
+                    <InputSelect class="form-control" @bind-Value="TaskListSearch.AssigneeId">
+                        @foreach (var item in Assignees)
+                            {
+                            <option value="@item.Id">@item.FullName</option>
+                            }
+                    </InputSelect>
+                </div>
+                <div class="col">
+                    <label> Priority </label>
+                    <InputSelect class="form-control" @bind-Value="TaskListSearch.Priority">
+                        @foreach (var item in Enum.GetNames(typeof(Priority)))
+                            {
+                            <option value="@item">@item</option>
+                            }
+                    </InputSelect>
+                </div>
+                <div class="col pt-4">
+                    <button type="submit" class="btn btn-primary"> Search </button>
+                </div>
+                <div class="col pt-4">
+                  <a href="/taskCreate" class="btn btn-success"> Create</a>
+                </div>
+            </div>
+
+        </EditForm>
+    </div>
     <div class="row mt-4">
         <table class="table">
             <thead>
