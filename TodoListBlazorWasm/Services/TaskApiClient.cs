@@ -29,5 +29,10 @@ namespace TodoListBlazorWasm.Services
             };
             return await _httpClient.GetFromJsonAsync<List<TaskDto>>("api/Tasks", options);
         }
+
+        public async Task<TaskDto> GetTasksDetail(string id)
+        {
+            return await _httpClient.GetFromJsonAsync<TaskDto>($"api/Tasks/{id}");
+        }
     }
 }
