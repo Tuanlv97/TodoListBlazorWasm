@@ -1,9 +1,10 @@
 ﻿@page "/TaskList"
+@using TodoListBlazorWasm.Components
 <h3>Todo List</h3>
 
 @if (Tasks == null)
 {
-    <p><em>Loading...</em></p>
+<LoadingIndicator></LoadingIndicator>
 }
 else
 {
