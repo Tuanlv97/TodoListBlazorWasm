@@ -25,7 +25,7 @@ namespace TodoListBlazorWasm.Services
             return result.IsSuccessStatusCode;
         }
 
-        public async Task<List<TaskDto>> GetTaskList()
+        public async Task<List<TaskDto>> GetTaskList(TaskListSearch taskListSearch)
         {
             var options = new JsonSerializerOptions()
             {
