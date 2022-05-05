@@ -39,5 +39,13 @@ namespace TodoListBlazorWasm.Services
         {
             return await _httpClient.GetFromJsonAsync<TaskDto>($"api/Tasks/{id}");
         }
+
+        public async Task<bool> UpdateTask(Guid id, TaskUpdateRequest request)
+        {
+            var result = await _httpClient.PutAsJsonAsync($"/api/tasks/{id}", request);
+            return result.IsSuccessStatusCode;
+
+        }
+
     }
 }
