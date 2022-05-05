@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,11 +14,12 @@ namespace TodoListBlazorWasm
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
+            builder.Services.AddBlazoredToast();
             builder.Services.AddTransient<ITaskApiClient, TaskApiClient>();
             builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
-            builder.Services.AddScoped(sp => new HttpClient 
-            { 
+            builder.Services.AddScoped(sp => new HttpClient
+            {
                 BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])
             });
 

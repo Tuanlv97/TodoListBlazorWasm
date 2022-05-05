@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace TodoListBlazorWasm.Pages
     {
         [Inject] private ITaskApiClient TaskApiClient { set; get; }
         [Inject] private IUserApiClient UserApiClient { set; get; }
+        [Inject] private IToastService ToastService { set; get; }
 
         private List<TaskDto> Tasks;
         private List<AssigneeDto> Assignees;
@@ -22,6 +25,11 @@ namespace TodoListBlazorWasm.Pages
         {
             Tasks = await TaskApiClient.GetTaskList();
             Assignees = await UserApiClient.GetAssignees();
+        }
+        private async Task SearchForm(EditContext context)
+        {
+            ToastService.ShowInfo("Search completed", "Info");
+            Tasks = await TaskApiClient.GetTaskList();
         }
     }
 
