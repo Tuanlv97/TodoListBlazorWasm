@@ -11,5 +11,6 @@ namespace TodoListBlazorWasm.Services
         Task<TaskDto> GetTasksDetail(string id);
         Task<bool> CreateTask(TaskCreateRequest request);
         Task<bool> UpdateTask(Guid id, TaskUpdateRequest request);
+        Task<bool> AssignTask(Guid id, AssignTaskRequest request);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TodoList.Models;
+using TodoListBlazorWasm.Pages.Components;
 using TodoListBlazorWasm.Services;
 
 namespace TodoListBlazorWasm.Pages
@@ -13,6 +15,7 @@ namespace TodoListBlazorWasm.Pages
 
         private List<TaskDto> Tasks;
         private TaskListSearch TaskListSearch = new TaskListSearch();
+        protected AssignTask  AssignTaskDialog { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -23,6 +26,16 @@ namespace TodoListBlazorWasm.Pages
         {
             TaskListSearch = taskListSearch;
             Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+        }
+        public void OpenAssignPopup(Guid id)
+        {
+            AssignTaskDialog.Show(id);
+        }
+
+        public async Task AssignTaskSuccess(bool result)
+        {
+            if (result)
+                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
         }
     }
 

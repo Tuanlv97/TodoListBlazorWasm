@@ -7,13 +7,15 @@
 
 @if (Tasks == null)
 {
-<LoadingIndicator></LoadingIndicator>
+    <LoadingIndicator></LoadingIndicator>
 }
 else
 {
     <div class="row">
         <TaskSearch OnSearch="SearchTask"></TaskSearch>
     </div>
+    <div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -32,23 +34,26 @@ else
             <tbody>
                 @foreach (var item in Tasks)
                 {
-                <tr>
-                    <td>@item.Name</td>
-                    <td><PriorityLabel Priority="item.Priority"></PriorityLabel></td>
-                    <td>@item.AssigneeName</td>
-                    <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
-                    <td><StatusLabel Status="item.Status"></StatusLabel></td>
-                    <td>
-                        <a href="/taskDetails/@item.Id" class="btn btn-primary">Detail</a>
-                        <a href="/taskEdit/@item.Id" class="btn btn-warning">Edit</a>
+                    <tr>
+                        <td>@item.Name</td>
+                        <td><PriorityLabel Priority="item.Priority"></PriorityLabel></td>
+                        <td><a @onclick="() => OpenAssignPopup(item.Id)"></a> @item.AssigneeName</td>
+                        <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
+                        <td><StatusLabel Status="item.Status"></StatusLabel></td>
+                        <td>
+                            <a href="/taskDetails/@item.Id" class="btn btn-primary">Detail</a>
+                            <a href="/taskEdit/@item.Id" class="btn btn-warning">Edit</a>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 }
 
             </tbody>
             <tfoot>
             </tfoot>
         </table>
+    </div>
+
+    <AssignTask @ref ="AssignTaskDialog" CloseEventCallbak="AssignTaskSuccess"></AssignTask>
 
 }
